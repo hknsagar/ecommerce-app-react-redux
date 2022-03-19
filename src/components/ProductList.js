@@ -1,14 +1,16 @@
 import React from "react";
-import { CartState } from "../context/CartContext";
 import { Card, Col, Row, Button, Badge } from "react-bootstrap";
 import { BsStarFill } from "react-icons/bs";
 import { FaRupeeSign } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, removeFromCart } from "../redux/actions/cartActions";
 
 const ProductList = () => {
-  const {
-    state: { products, cart },
-    dispatch,
-  } = CartState();
+  const products = useSelector(state => state.products.products);
+  const cart = useSelector(state => state.cart.cart);
+
+  const dispatch = useDispatch();
+  console.log(cart);
 
   return (
     <Row xs={1} md={3} className="mt-3">
@@ -39,7 +41,7 @@ const ProductList = () => {
                   <Button
                     variant="outline-danger"
                     onClick={() => {
-                      dispatch({ type: "REMOVE_FROM_CART", payload: product });
+                      dispatch(removeFromCart(product));
                     }}
                   >
                     Remove From Cart
@@ -48,7 +50,7 @@ const ProductList = () => {
                   <Button
                     variant="outline-success"
                     onClick={() => {
-                      dispatch({ type: "ADD_TO_CART", payload: product });
+                      dispatch(addToCart(product));
                     }}
                     disabled={!product.inStock}
                   >

@@ -1,14 +1,13 @@
 import React from "react";
 import { Card, Col, Container, Image, ListGroup, Row, Button } from "react-bootstrap";
-import { CartState } from "../context/CartContext";
 import { FaRupeeSign } from "react-icons/fa";
 import { BsCart } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFromCart } from "../redux/actions/cartActions";
 
 const Cart = () => {
-  const {
-    state: { cart },
-    dispatch,
-  } = CartState();
+  const cart = useSelector(state => state.cart.cart);
+  const dispatch = useDispatch();
 
   let deliveryCharges = 0;
 
@@ -75,7 +74,7 @@ const Cart = () => {
                                 className="fw-bold p-0"
                                 variant="link"
                                 onClick={() =>
-                                  dispatch({ type: "REMOVE_FROM_CART", payload: item })
+                                  dispatch(removeFromCart(item))
                                 }
                                 style={{ textDecoration: "none", color: "red" }}
                               >

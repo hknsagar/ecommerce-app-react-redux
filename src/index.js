@@ -1,20 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Switch } from "react-router-dom";
-import { CartProvider } from "./context/CartContext";
 import "./index.css";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Provider } from "react-redux";
+import store from './redux/store';
 
 ReactDOM.render(
   <React.StrictMode>
-    <CartProvider>
+    <Provider store={store}>
       <BrowserRouter>
         <Switch>
           <App />
         </Switch>
       </BrowserRouter>
-    </CartProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

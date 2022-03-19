@@ -2,15 +2,14 @@ import React from "react";
 import { Container, Navbar, Dropdown, Nav, Badge, Button, Image, Row, Col } from "react-bootstrap";
 import { BsBagCheck, BsCartPlus } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { CartState } from "../context/CartContext";
 import { FaRupeeSign } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFromCart } from "../redux/actions/cartActions";
 
 const Header = () => {
-  const {
-    state: { cart },
-    dispatch,
-  } = CartState();
+  const cart = useSelector(state => state.cart.cart);
+  const dispatch = useDispatch();
 
   return (
     <Navbar bg="dark" expand="lg" variant="dark" id="headerMain">
@@ -61,7 +60,7 @@ const Header = () => {
                               <MdDelete
                                 size="25px"
                                 onClick={() =>
-                                  dispatch({ type: "REMOVE_FROM_CART", payload: item })
+                                  dispatch(removeFromCart(item))
                                 }
                               />
                             </Col>
