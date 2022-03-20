@@ -10,7 +10,6 @@ const ProductList = () => {
   const cart = useSelector(state => state.cart.cart);
 
   const dispatch = useDispatch();
-  console.log(cart);
 
   return (
     <Row xs={1} md={3} className="mt-3">

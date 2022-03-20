@@ -20,6 +20,16 @@ export const productsReducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.SET_ALL_PRODUCTS:
       return state;
+    case ActionTypes.SORT_BY_ASC:
+      return {
+        ...state,
+        products: [...state.products.sort((product1, product2) => product1.price - product2.price)],
+      };
+    case ActionTypes.SORT_BY_DESC:
+      return {
+        ...state,
+        products: [...state.products.sort((product1, product2) => product2.price - product1.price)],
+      };
     default:
       return state;
   }
